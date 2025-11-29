@@ -27,3 +27,7 @@ Objectives & Features
 Screenshot:
 
 ![Program Code](./image.png)
+
+![Program Code](./output.png)
+
+
