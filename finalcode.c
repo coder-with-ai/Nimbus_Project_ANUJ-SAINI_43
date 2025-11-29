@@ -1,3 +1,5 @@
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,6 +36,7 @@ void detectSuspicious(LogEntry *logs, int n) {
 
     for (int i = 0; i < n; i++) {
         if (strcmp(logs[i].status, "FAILED") == 0) {
+
             int count = 1;
 
             for (int j = i + 1; j < n; j++) {
@@ -65,6 +68,7 @@ void reportByUser(LogEntry *logs, int n) {
 
     for (int i = 0; i < n; i++) {
         if (isUnique(uniqueUsers, uCount, logs[i].username)) {
+
             strcpy(uniqueUsers[uCount++], logs[i].username);
 
             int success = 0, failed = 0;
@@ -93,11 +97,13 @@ void reportByIP(LogEntry *logs, int n) {
     printf("| IP Address    | Success  | Failed  |\n");
     printf("+---------------+----------+---------+\n");
 
-    char uniqueIPs[100][20];
+    char uniqueIPs[100][50];   // FIXED: increased size to 50 to avoid crash
     int ipCount = 0;
 
     for (int i = 0; i < n; i++) {
-        if (strcmp(logs[i].ip, "") != 0 && isUnique((char (*)[50])uniqueIPs, ipCount, logs[i].ip)) {
+
+        if (strcmp(logs[i].ip, "") != 0 &&
+            isUnique(uniqueIPs, ipCount, logs[i].ip)) {
 
             strcpy(uniqueIPs[ipCount++], logs[i].ip);
 
@@ -136,7 +142,10 @@ int main() {
     rewind(fp);
 
     LogEntry *logs = malloc(count * sizeof(LogEntry));
-    if (!logs) return 1;
+    if (!logs) {
+        printf("Memory allocation failed.\n");
+        return 1;
+    }
 
     int index = 0;
     while (fgets(line, sizeof(line), fp)) {
@@ -164,4 +173,3 @@ int main() {
     free(logs);
     return 0;
 }
-
