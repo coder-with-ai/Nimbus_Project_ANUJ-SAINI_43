@@ -27,7 +27,3 @@ Objectives & Features
 Screenshot:
 
 ![Program Code](./image.png)
-
-DEMO OUTPUT :
-<img width="576" height="486" alt="output" src="https://github.com/user-attachments/assets/27ebbd58-1a7d-4f24-91d6-5ccc9758687e" />
-
